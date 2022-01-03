@@ -14,7 +14,7 @@ public class Coordinate {
         return this.y;
     }
     
-    //method point
+    //method coordinate
     public Coordinate() {
     	this.x = 0.0;
     	this.y = 0.0;
