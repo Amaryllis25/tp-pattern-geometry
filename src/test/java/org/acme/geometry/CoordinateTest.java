@@ -15,4 +15,10 @@ public class CoordinateTest {
 		Assert.assertEquals(0.0, c.getY(), EPSILON);
 	}
 
+	@Test
+	public void testDefaultConstructor2(){
+		Coordinate c = new Coordinate(1.1, 1.2);
+		Assert.assertEquals(1.1, c.getX(), EPSILON);
+		Assert.assertEquals(1.2, c.getY(), EPSILON);
+	}
 }
