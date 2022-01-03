@@ -9,8 +9,8 @@ public class PointTest {
 	@Test
 	public void testDefaultConstructor(){
 		// TODO
-		//Coordinate c = new Coordinate();
-		//Assert.assertEquals(0.0, c.getX(), EPSILON);
-		//Assert.assertEquals(0.0, c.getY(), EPSILON);
+		Point p = new Point();
+		Assert.assertEquals(0.0, p.getCoordinate().getX(), EPSILON);
+		Assert.assertEquals(0.0, p.getCoordinate().getY(), EPSILON);
 	}
 }
