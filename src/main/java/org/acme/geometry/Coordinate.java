@@ -2,8 +2,8 @@ package org.acme.geometry;
 
 public class Coordinate {
 	
-	double x;
-	double y;
+	private final double x;
+	private final double y;
 
 	//getter
     public double getX() {
