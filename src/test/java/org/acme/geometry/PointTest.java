@@ -15,11 +15,10 @@ public class PointTest {
 	}
 	
     @Test
-    public void testDefaultConstructor2() {
+    public void testDefaultConstructorWithXY() {
         Coordinate c = new Coordinate(1.1, 1.2);
         Point p = new Point(c);
         Assert.assertEquals(c, p.getCoordinate());
-        Assert.assertFalse(p.isEmpty());
     }
     
     @Test
@@ -29,12 +28,62 @@ public class PointTest {
     }
     
     @Test
+    public void testConstructorNotEmpty() {
+        Coordinate c = new Coordinate(1.1, 1.2);
+        Point p = new Point(c);
+        Assert.assertFalse(p.isEmpty());
+    }
+    
+    @Test
+    public void testConstructorIsEmpty() {
+        Point p = new Point();
+        Assert.assertTrue(p.isEmpty());
+    }
+    
+    @Test
     public void testTranslateMethod() {
         Point p = SampleFactory.createPointO();
-        p.translate(10, 10);
+        p.translate(10, -1);
         Assert.assertEquals(11.1, p.getCoordinate().getX(), EPSILON);
-        Assert.assertEquals(11.2, p.getCoordinate().getY(), EPSILON);
+        Assert.assertEquals(0.2, p.getCoordinate().getY(), EPSILON);
 		Assert.assertFalse(p.isEmpty());
     }
 
+	@Test
+	public void testCloneMethod() {
+
+		Point Point1 = SampleFactory.createPointO();
+		
+		Point Point2 = Point1.clone();
+
+		Assert.assertNotSame(Point1,Point2);
+        Assert.assertEquals(1.1, Point2.getCoordinate().getX(), EPSILON);
+        Assert.assertEquals(1.2, Point2.getCoordinate().getY(), EPSILON);
+	}
+	
+	@Test
+	public void testCloneMethodWithTranslate() {
+		
+		Point Point1 = SampleFactory.createPointO();
+		
+		Point Point2 = Point1.clone();
+		Point2.translate(10.0, -1);
+		
+		Assert.assertNotSame(Point1,Point2);
+        Assert.assertEquals(11.1, Point2.getCoordinate().getX(), EPSILON);
+        Assert.assertEquals(0.2, Point2.getCoordinate().getY(), EPSILON);
+	}
+	
+	@Test
+	public void testMultipleClone() {
+		
+		Point Point1 = SampleFactory.createPointO();
+		
+		Point Point2 = Point1.clone();
+		Point Point3 = Point2.clone();
+		
+		Assert.assertNotSame(Point1,Point2);
+        Assert.assertEquals(Point1.getCoordinate().getX(), Point3.getCoordinate().getX(), EPSILON);
+        Assert.assertEquals(Point1.getCoordinate().getY(), Point3.getCoordinate().getY(), EPSILON);
+	}
 }

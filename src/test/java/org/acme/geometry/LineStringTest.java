@@ -12,21 +12,23 @@ public class LineStringTest {
 	
     @Test
     public void testDefaultConstructor() {
+    	
         LineString line = new LineString();
+        
         Assert.assertEquals(0, line.getNumPoints());
-        Assert.assertTrue(line.isEmpty());
     }
     
     @Test
     public void testDefaultConstructor2() {
+    	
         List<Point> points = new ArrayList<Point>();
-        Coordinate c = new Coordinate(1.1, 1.2);
-        Point p = new Point(c);
+        
+        Point p = SampleFactory.createPointO();
         points.add(p);
 
         LineString line = new LineString(points);
+        
         Assert.assertEquals(p, line.getPointN(0));
-		Assert.assertFalse(line.isEmpty());
     }
     
     @Test
@@ -36,18 +38,18 @@ public class LineStringTest {
     }
     
     @Test
-    public void testConstructorSizeAdd() {
-        List<Point> points = new ArrayList<Point>();
-        Coordinate c = new Coordinate(1.1, 1.2);
-        Coordinate c2 = new Coordinate(1.3, 1.4);
-        
-        Point p = new Point(c);
-        Point p2 = new Point(c2);
-        
-        points.add(p);
-        points.add(p2);
+    public void testConstructorIsEmpty() {
+    	
+    	LineString line = new LineString();
 
-        LineString line = new LineString(points);
+		Assert.assertTrue(line.isEmpty());
+    }
+    
+    @Test
+    public void testConstructorNotEmpty() {
+    	
+    	LineString line = SampleFactory.createLineStringOA();
+
         Assert.assertEquals(2, line.getNumPoints());
 		Assert.assertFalse(line.isEmpty());
     }
@@ -77,4 +79,35 @@ public class LineStringTest {
         Assert.assertEquals(33.6, line.getPointN(1).getCoordinate().getY(), EPSILON);
 		Assert.assertFalse(line.isEmpty());
     }
+    
+	@Test
+	public void testCloneMethod() {
+		
+		LineString line1 = SampleFactory.createLineStringOA();
+		
+		LineString line2 = line1.clone();
+		
+		Assert.assertNotSame(line1, line2);
+		Assert.assertEquals(line1.getPointN(0).getCoordinate().getX(), line2.getPointN(0).getCoordinate().getX(), EPSILON);
+		Assert.assertEquals(line1.getPointN(0).getCoordinate().getY(), line2.getPointN(0).getCoordinate().getY(), EPSILON);
+		Assert.assertEquals(line1.getPointN(1).getCoordinate().getX(), line2.getPointN(1).getCoordinate().getX(), EPSILON);
+		Assert.assertEquals(line1.getPointN(1).getCoordinate().getY(), line2.getPointN(1).getCoordinate().getY(), EPSILON);
+	}
+	
+	@Test
+	public void testCloneMethodWithTranslate() {
+		
+		LineString line1 = SampleFactory.createLineStringOA();
+		
+		LineString line2 = line1.clone();
+		
+		line2.translate(10, -1);
+		
+		//assert
+		Assert.assertNotSame(line1, line2);
+		Assert.assertNotSame(line1.getPointN(0).getCoordinate().getX(), line2.getPointN(0).getCoordinate().getX());
+		Assert.assertNotSame(line1.getPointN(0).getCoordinate().getY(), line2.getPointN(0).getCoordinate().getY());
+		Assert.assertEquals(16.23, line2.getPointN(1).getCoordinate().getX(), EPSILON);
+		Assert.assertEquals(22.6, line2.getPointN(1).getCoordinate().getY(), EPSILON);
+	}
 }
