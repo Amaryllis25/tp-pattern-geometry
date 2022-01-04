@@ -1,6 +1,6 @@
 package org.acme.geometry;
 
-public class EnvelopeBuilder {
+public class EnvelopeBuilder implements GeometryVisitor{
 	
     private Envelope envelope;
 
@@ -25,7 +25,7 @@ public class EnvelopeBuilder {
                 }
 			}
 			else if (this.envelope.getYmin() > coordinate.getY()){
-                Coordinate topRight = new Coordinate(this.envelope.getXmax(),this.envelope.getYmax());
+                Coordinate topRight = new Coordinate();
                 Coordinate bottomLeft = new Coordinate(this.envelope.getXmin(), coordinate.getY());
                 this.envelope = new Envelope(bottomLeft, topRight);
             }
@@ -48,6 +48,18 @@ public class EnvelopeBuilder {
 	
     public Envelope build(){
         return this.envelope;
+    }
+    
+    @Override
+    public void visit(Point point) {
+        this.insert(point.getCoordinate());
+    }
+
+    @Override
+    public void visit(LineString lineString) {
+        for(int i=0; i < lineString.getNumPoints(); ++i) {
+            this.insert(lineString.getPointN(i).getCoordinate());
+        }
     }
 	
 }

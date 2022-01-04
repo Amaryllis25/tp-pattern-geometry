@@ -13,7 +13,7 @@ public class AbstractGeometryTest {
 	
 	@Test
 	public void testTextMethodineString(){
-		LineString line = SampleFactory.createLineStringOA();
-		Assert.assertEquals("LINESTRING(1.1 1.2,6.23 23.6)", line.asText());
+		LineString lineString = SampleFactory.createLineStringOA();
+		Assert.assertEquals("LINESTRING(1.1 1.2,6.23 23.6)", lineString.asText());
 	}
 }

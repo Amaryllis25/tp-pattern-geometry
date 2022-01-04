@@ -33,8 +33,8 @@ public class LogGeometryVisitorTest {
         PrintStream out = new PrintStream(os);
         LogGeometryVisitor visitor = new LogGeometryVisitor(out);
 
-        LineString line = SampleFactory.createLineStringOABCD();
-        line.accept(visitor);
+        LineString lineString = SampleFactory.createLineStringOABCD();
+        lineString.accept(visitor);
 
         out.println("Je suis une polyligne définie par 5 point(s).");
         String result = os.toString("UTF8");
@@ -50,8 +50,8 @@ public class LogGeometryVisitorTest {
         PrintStream out = new PrintStream(os);
         LogGeometryVisitor visitor = new LogGeometryVisitor();
         
-        LineString line = SampleFactory.createLineStringOABCD();
-        line.accept(visitor);
+        LineString lineString = SampleFactory.createLineStringOABCD();
+        lineString.accept(visitor);
         
         String result = os.toString("UTF8");
         

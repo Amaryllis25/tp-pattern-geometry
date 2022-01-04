@@ -19,15 +19,15 @@ public class WktWriter {
             }
         }
         else if (geometry instanceof LineString){
-            LineString line = (LineString)geometry;
-            if (line.isEmpty()) {
+            LineString lineString = (LineString)geometry;
+            if (lineString.isEmpty()) {
             	wkt = "LINESTRING EMPTY";
             }
             else {
-                Point Point1 = line.getPointN(0);
+                Point Point1 = lineString.getPointN(0);
                 wkt = "LINESTRING(" + Point1.getCoordinate().getX() + " " + Point1.getCoordinate().getY();
-                for (int i = 1; i < line.getNumPoints(); i++){
-                    wkt += "," + writerCoordinate(line.getPointN(i).getCoordinate());
+                for (int i = 1; i < lineString.getNumPoints(); i++){
+                    wkt += "," + writerCoordinate(lineString.getPointN(i).getCoordinate());
                 }
                 wkt += ")";
             }
