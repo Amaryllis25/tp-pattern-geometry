@@ -103,7 +103,6 @@ public class LineStringTest {
 		
 		line2.translate(10, -1);
 		
-		//assert
 		Assert.assertNotSame(line1, line2);
 		Assert.assertNotSame(line1.getPointN(0).getCoordinate().getX(), line2.getPointN(0).getCoordinate().getX());
 		Assert.assertNotSame(line1.getPointN(0).getCoordinate().getY(), line2.getPointN(0).getCoordinate().getY());
