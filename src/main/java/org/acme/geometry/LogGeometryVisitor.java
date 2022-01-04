@@ -19,7 +19,7 @@ public class LogGeometryVisitor implements GeometryVisitor{
 	}
 	
 	public void visit(LineString lineString) {
-		out.println("Je suis une polyligne définie par"+ lineString.getNumPoints() + "point(s)");
+		out.println("Je suis une polyligne définie par "+ lineString.getNumPoints() + " point(s).");
 	}
 
 }
