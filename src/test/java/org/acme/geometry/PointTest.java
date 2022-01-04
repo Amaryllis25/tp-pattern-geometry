@@ -87,4 +87,15 @@ public class PointTest {
         Assert.assertEquals(Point1.getCoordinate().getY(), Point3.getCoordinate().getY(), EPSILON);
 	}
 	
+    @Test
+    public void testGetEnvelopeMethod() {
+    	
+        Point p = SampleFactory.createPointO();
+
+        Envelope envelope = p.getEnvelope();
+        Assert.assertEquals(1.1, envelope.getXmin(), EPSILON);
+        Assert.assertEquals(1.2, envelope.getYmin(), EPSILON);
+        Assert.assertEquals(1.1, envelope.getXmax(), EPSILON);
+        Assert.assertEquals(1.2, envelope.getYmax(), EPSILON);
+    }
 }

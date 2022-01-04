@@ -60,4 +60,5 @@ public class LineString implements Geometry{
 		}
 		return builder.build();
 	}
+    
 }

@@ -103,11 +103,22 @@ public class LineStringTest {
 		
 		line2.translate(10, -1);
 		
-		//assert
 		Assert.assertNotSame(line1, line2);
 		Assert.assertNotSame(line1.getPointN(0).getCoordinate().getX(), line2.getPointN(0).getCoordinate().getX());
 		Assert.assertNotSame(line1.getPointN(0).getCoordinate().getY(), line2.getPointN(0).getCoordinate().getY());
 		Assert.assertEquals(16.23, line2.getPointN(1).getCoordinate().getX(), EPSILON);
 		Assert.assertEquals(22.6, line2.getPointN(1).getCoordinate().getY(), EPSILON);
+	}
+	
+	@Test
+	public void testGetEnvelopeMethod() {
+
+		LineString line = SampleFactory.createLineStringOABCD();
+		Envelope envelope = line.getEnvelope();
+		
+		Assert.assertEquals(0.1, envelope.getXmin(), EPSILON);
+		Assert.assertEquals(0.4, envelope.getYmin(), EPSILON);
+		Assert.assertEquals(25, envelope.getXmax(), EPSILON);
+		Assert.assertEquals(24, envelope.getYmax(), EPSILON);
 	}
 }
