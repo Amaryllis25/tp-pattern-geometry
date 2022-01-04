@@ -42,5 +42,20 @@ public class LogGeometryVisitorTest {
 
         Assert.assertEquals(results[0], results[1]);
     }
+    
+    @Test
+    public void testVisitEmpty() throws UnsupportedEncodingException{
+    	
+    	ByteArrayOutputStream os = new ByteArrayOutputStream();
+        PrintStream out = new PrintStream(os);
+        LogGeometryVisitor visitor = new LogGeometryVisitor();
+        
+        LineString line = SampleFactory.createLineStringOABCD();
+        line.accept(visitor);
+        
+        String result = os.toString("UTF8");
+        
+        Assert.assertEquals("", result);
+    }
 
 }
