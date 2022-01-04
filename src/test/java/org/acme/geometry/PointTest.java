@@ -86,4 +86,5 @@ public class PointTest {
         Assert.assertEquals(Point1.getCoordinate().getX(), Point3.getCoordinate().getX(), EPSILON);
         Assert.assertEquals(Point1.getCoordinate().getY(), Point3.getCoordinate().getY(), EPSILON);
 	}
+	
 }
