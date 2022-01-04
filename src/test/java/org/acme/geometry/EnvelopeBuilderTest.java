@@ -8,63 +8,11 @@ public class EnvelopeBuilderTest {
 	public static final double EPSILON = 1.0e-15;
 	
 	@Test
-	public void testDefaultConstructorX() {
-		
+	public void testDefaultConstructor(){
+
 		EnvelopeBuilder builder = new EnvelopeBuilder();
-		builder.insert(new Coordinate(1.1, 1.2));
-		builder.insert(new Coordinate(6.23, 23.6));
-		builder.insert(new Coordinate(0.0, 0.0));
-		Envelope envelope = builder.build();
-		
-        Assert.assertEquals(0.0, envelope.getXmin(), EPSILON);
-        Assert.assertEquals(0.0, envelope.getYmin(), EPSILON);
-        Assert.assertEquals(6.23, envelope.getXmax(), EPSILON);
-        Assert.assertEquals(23.6, envelope.getYmax(), EPSILON);
-	}
-	
-	@Test
-	public void testDefaultConstructorY() {
-		
-		EnvelopeBuilder builder = new EnvelopeBuilder();
-		builder.insert(new Coordinate(1.1, 1.2));
-		builder.insert(new Coordinate(6.23, 23.6));
-		builder.insert(new Coordinate(10, 30));
-		Envelope envelope = builder.build();
-		
-        Assert.assertEquals(1.1, envelope.getXmin(), EPSILON);
-        Assert.assertEquals(1.2, envelope.getYmin(), EPSILON);
-        Assert.assertEquals(10, envelope.getXmax(), EPSILON);
-        Assert.assertEquals(30, envelope.getYmax(), EPSILON);
-	}
-	
-	@Test
-	public void testDefaultConstructorXNotY() {
-		
-		EnvelopeBuilder builder = new EnvelopeBuilder();
-		builder.insert(new Coordinate(1.1, 1.2));
-		builder.insert(new Coordinate(6.23, 23.6));
-		builder.insert(new Coordinate(0, 30));
-		Envelope envelope = builder.build();
-		
-        Assert.assertEquals(0, envelope.getXmin(), EPSILON);
-        Assert.assertEquals(1.2, envelope.getYmin(), EPSILON);
-        Assert.assertEquals(6.23, envelope.getXmax(), EPSILON);
-        Assert.assertEquals(30, envelope.getYmax(), EPSILON);
-	}
-	
-	@Test
-	public void testDefaultConstructorYnotX() {
-		
-		EnvelopeBuilder builder = new EnvelopeBuilder();
-		builder.insert(new Coordinate(1.1, 1.2));
-		builder.insert(new Coordinate(6.23, 23.6));
-		builder.insert(new Coordinate(10, 0));
-		Envelope envelope = builder.build();
-		
-        Assert.assertEquals(1.1, envelope.getXmin(), EPSILON);
-        Assert.assertEquals(0, envelope.getYmin(), EPSILON);
-        Assert.assertEquals(10, envelope.getXmax(), EPSILON);
-        Assert.assertEquals(23.6, envelope.getYmax(), EPSILON);
+		Assert.assertEquals(0, builder.getXValues().size());
+		Assert.assertEquals(0, builder.getYValues().size());
 	}
 
 	@Test
@@ -87,5 +35,21 @@ public class EnvelopeBuilderTest {
 		Envelope envelope = builder.build();
 		
         Assert.assertTrue(envelope.isEmpty());
+	}
+	
+
+	@Test
+	public void testBuildMethod(){
+		
+		EnvelopeBuilder builder = new EnvelopeBuilder();
+		builder.insert(new Coordinate(1.1, 1.2));
+		builder.insert(new Coordinate(6.23, 23.6));
+		builder.insert(new Coordinate(0.0, 0.0));
+		Envelope result = builder.build();
+		
+		Assert.assertEquals(0.0, result.getXmin(), EPSILON);
+		Assert.assertEquals(0.0, result.getYmin(), EPSILON);
+		Assert.assertEquals(6.23, result.getXmax(), EPSILON);
+		Assert.assertEquals(23.6, result.getYmax(), EPSILON);
 	}
 }

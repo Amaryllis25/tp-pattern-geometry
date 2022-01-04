@@ -1,53 +1,49 @@
 package org.acme.geometry;
 
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Collections;
+
 public class EnvelopeBuilder implements GeometryVisitor{
 	
     private Envelope envelope;
+    
+    private List<Double> xVals;
+    private List<Double> yVals;
 
     public EnvelopeBuilder() {
-        this.envelope = new Envelope();
+        this.xVals = new ArrayList<Double>();
+        this.yVals = new ArrayList<Double>();
+    }
+    
+    public List<Double> getXValues() {
+        return this.xVals;
+    }
+
+    public List<Double> getYValues() {
+        return this.yVals;
+    }
+
+    public void insert(Coordinate coordinate) {
+        this.xVals.add(coordinate.getX());
+        this.yVals.add(coordinate.getY());
     }
 	
-	public void insert(Coordinate coordinate) {
-		if(this.envelope.isEmpty()) {
-			this.envelope = new Envelope(coordinate, coordinate);
-		}
-		else {
-			if(coordinate.getX() < this.envelope.getXmin()) {
-				Coordinate topRight = new Coordinate(this.envelope.getXmax(),this.envelope.getYmax());
-                if (this.envelope.getYmin() > coordinate.getY())
-                {
-                	this.envelope = new Envelope(coordinate, topRight);
-                }
-                else {
-                    Coordinate bottomLeft = new Coordinate(coordinate.getX(),this.envelope.getYmin());
-                    this.envelope = new Envelope(bottomLeft, topRight);
-                }
-			}
-			else if (this.envelope.getYmin() > coordinate.getY()){
-                Coordinate topRight = new Coordinate();
-                Coordinate bottomLeft = new Coordinate(this.envelope.getXmin(), coordinate.getY());
-                this.envelope = new Envelope(bottomLeft, topRight);
-            }
-			if(coordinate.getX() > this.envelope.getXmax()) {
-                Coordinate bottomLeft = new Coordinate(this.envelope.getXmin(),this.envelope.getYmin());
-                if (this.envelope.getYmax() < coordinate.getY())
-                this.envelope = new Envelope(bottomLeft, coordinate);
-                else {
-                    Coordinate topRight = new Coordinate(coordinate.getX(),this.envelope.getYmax());
-                    this.envelope = new Envelope(bottomLeft, topRight);
-                }
-			}
-			else if (this.envelope.getYmax() < coordinate.getY()){
-                Coordinate topRight = new Coordinate(this.envelope.getXmax(),coordinate.getY());
-                Coordinate bottomLeft = new Coordinate(this.envelope.getXmin(), this.envelope.getYmin());
-                this.envelope = new Envelope(bottomLeft, topRight);
-            }
-		}
-	}
-	
-    public Envelope build(){
-        return this.envelope;
+    public Envelope build() {
+    	if((xVals.size() == yVals.size()) && xVals.size()>0) {
+    		double xmin = Collections.min(xVals);
+    		double xmax = Collections.max(xVals);
+
+    		double ymin = Collections.min(yVals);
+    		double ymax = Collections.max(yVals);
+
+    		Coordinate bottomLeft = new Coordinate(xmin, ymin);
+    		Coordinate topRight = new Coordinate(xmax, ymax);
+    		return new Envelope(bottomLeft, topRight);
+    	}
+    	else {
+    		return new Envelope();
+    	}
     }
     
     @Override
