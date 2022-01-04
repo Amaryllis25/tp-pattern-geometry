@@ -15,7 +15,7 @@ public class WktWriter {
             	wkt = "POINT EMPTY";
             }
             else {
-            	wkt = "POINT(" + point.getCoordinate().getX() + " " + point.getCoordinate().getY() + ")";
+            	wkt = "POINT(" + writerCoordinate(point.getCoordinate()) +")";
             }
         }
         else if (geometry instanceof LineString){
@@ -27,8 +27,7 @@ public class WktWriter {
                 Point Point1 = line.getPointN(0);
                 wkt = "LINESTRING(" + Point1.getCoordinate().getX() + " " + Point1.getCoordinate().getY();
                 for (int i = 1; i < line.getNumPoints(); i++){
-                    Point p = line.getPointN(i);
-                    wkt += "," + p.getCoordinate().getX() + " " + p.getCoordinate().getY();
+                    wkt += "," + writerCoordinate(line.getPointN(i).getCoordinate());
                 }
                 wkt += ")";
             }
@@ -38,5 +37,9 @@ public class WktWriter {
         }
         return wkt;
     }
+    
+	public static String writerCoordinate(Coordinate coordinate) {
+		return coordinate.getX() + " " + coordinate.getY();
+	}
 
 }
