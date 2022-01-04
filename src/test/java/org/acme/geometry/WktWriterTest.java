@@ -29,7 +29,7 @@ public class WktWriterTest {
 	}
 	
 	@Test
-	public void testWritePoint() {
+	public void testWriteMethodPoint() {
 
 		WktWriter wkt = new WktWriter();
 		Point p = SampleFactory.createPointO();
@@ -40,7 +40,7 @@ public class WktWriterTest {
 	}
 	
 	@Test
-	public void testWriteLinestringOA() {
+	public void testWriteMethodLineString() {
 
 		WktWriter wkt = new WktWriter();
 		LineString line = SampleFactory.createLineStringOA();
