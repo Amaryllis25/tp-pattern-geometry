@@ -32,15 +32,15 @@ public class WktWriterTest {
 	public void testWritePoint() {
 
 		WktWriter wkt = new WktWriter();
-		Point M = SampleFactory.createPointO();
+		Point p = SampleFactory.createPointO();
 		
-		String str = wkt.write(M);
+		String str = wkt.write(p);
 		
 		Assert.assertEquals("POINT(1.1 1.2)", str);
 	}
 	
 	@Test
-	public void testWriteLinestringOM() {
+	public void testWriteLinestringOA() {
 
 		WktWriter wkt = new WktWriter();
 		LineString line = SampleFactory.createLineStringOA();
